@@ -36,6 +36,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// for RSS
+	implementation 'com.rometools:rome:2.1.0'
+
+	// for HTML parsing
+	implementation 'org.jsoup:jsoup:1.18.3'
+
+	// for ChatGPT
+	implementation 'org.springframework.ai:spring-ai-openai:1.0.0-M6'
 }
 
 tasks.named('test') {
