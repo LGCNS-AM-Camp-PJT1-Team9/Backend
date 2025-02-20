@@ -21,6 +21,9 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
-# OpenAI API 설정
-openai:
-  api-key: API-KEY  # 실제 API 키로 교체
+# Groq API 설정
+groq:
+  api-url: https://api.groq.com/openai/v1/chat/completions
+  model: llama-3.2-90b-vision-preview
+  temperature: 0.7
+  api-key: API_KEY    # 실제 API키 입력
