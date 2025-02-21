@@ -1,8 +1,10 @@
 package com.team9.jobbotdari.controller;
 
+import com.team9.jobbotdari.dto.request.ProfileUpdateRequestDto;
 import com.team9.jobbotdari.dto.response.ProfileResponseDto;
 import com.team9.jobbotdari.security.CustomUserDetails;
 import com.team9.jobbotdari.service.ProfileService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
@@ -38,6 +38,16 @@ public class ProfileController {
     public ResponseEntity<Map<String, Object>> getProfile(@AuthenticationPrincipal CustomUserDetails userDetails) {
         ProfileResponseDto profile = profileService.getProfile(userDetails);
         return ResponseEntity.ok().body(Map.of("code", 200, "data", profile));
+    }
+
+    @PatchMapping(value = "/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Map<String, Object>> updateProfile(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @Valid @RequestPart ProfileUpdateRequestDto requestDto,
+            @RequestPart(value = "file", required = false) MultipartFile file) {
+
+        profileService.updateProfile(userDetails, requestDto, file);
+        return ResponseEntity.ok().body(Map.of("code", 200, "data", true));
     }
 
     @GetMapping("/files/{filename}")
