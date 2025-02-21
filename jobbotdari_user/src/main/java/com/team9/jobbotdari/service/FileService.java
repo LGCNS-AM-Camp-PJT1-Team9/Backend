@@ -5,6 +5,7 @@ import com.team9.jobbotdari.entity.File;
 import com.team9.jobbotdari.entity.User;
 import com.team9.jobbotdari.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FileService {

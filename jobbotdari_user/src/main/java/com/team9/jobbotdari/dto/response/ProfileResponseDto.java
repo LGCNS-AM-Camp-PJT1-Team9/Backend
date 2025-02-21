@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
-public class SigninResponseDto {
-    private String userRole;
-    private String accessToken;
+@NoArgsConstructor
+public class ProfileResponseDto {
+    private Long id;
+    private String name;
+    private String username;
+    private String file;
 }
