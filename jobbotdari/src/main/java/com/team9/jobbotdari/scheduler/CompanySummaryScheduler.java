@@ -42,6 +42,7 @@ public class CompanySummaryScheduler {
         // 2. 각 회사를 순회하면서 뉴스 검색 및 요약 업데이트를 수행합니다.
         for (Company company : companies) {
             // 회사 이름을 검색어로 사용하여 뉴스 기사 리스트를 조회합니다.
+            // 뉴스 검색어 변경 필요 시, 해당 부분 수정
             List<NewsDto> articles = newsService.searchNews(company.getName());
             // 뉴스 기사들의 타이틀에 번호를 붙여 하나의 문자열로 결합합니다.
             String titlesSummaryInput = newsService.generateTitlesSummaryInput(articles);
@@ -54,7 +55,7 @@ public class CompanySummaryScheduler {
             companyRepository.save(company);
         }
 
-        // 업데이트 완료 로그 출력 (디버깅 및 모니터링용)
+        // 업데이트 완료 로그 출력
         System.out.println("All Company descriptions updated at " + LocalDateTime.now());
     }
 }

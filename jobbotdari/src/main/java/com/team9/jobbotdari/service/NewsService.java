@@ -23,11 +23,11 @@ public class NewsService {
      * Google News의 RSS 피드를 이용하여 최신 뉴스를 가져옵니다.
      *
      * @param query 검색어 (사용자가 입력한 키워드)
-     * @return 검색 결과에 해당하는 NewsArticle 객체의 리스트
+     * @return 검색 결과에 해당하는 NewsDto 객체의 리스트
      */
     public List<NewsDto> searchNews(String query) {
         // 결과를 저장할 리스트 생성
-        List<NewsDto> articles = new ArrayList<>();
+        List<NewsDto> newsDtoList = new ArrayList<>();
         try {
             // 검색어(query)를 URL 인코딩하여 특수문자 처리
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
@@ -50,22 +50,22 @@ public class NewsService {
                 // SyndFeed에서 각 뉴스 항목(entry)을 순회
                 for (SyndEntry entry : feed.getEntries()) {
 
-                    // 최대 5개의 뉴스 항목만 가져오도록 설정
-                    if (articles.size() >= 5) break;
+                    // 가져오는 뉴스 항목 갯수 설정
+//                    if (newsDtoList.size() >= 5) break;
 
-                    // NewsArticle 객체 생성 (dto 클래스)
-                    NewsDto article = new NewsDto();
+                    // NewsDto 객체 생성 (dto 클래스)
+                    NewsDto newsDto = new NewsDto();
 
                     // 뉴스 제목 설정
-                    article.setTitle(entry.getTitle());
+                    newsDto.setTitle(entry.getTitle());
                     // 뉴스 링크(원문 URL) 설정
-                    article.setLink(entry.getLink());
+                    newsDto.setLink(entry.getLink());
 
                     // 뉴스 발행일 설정
-                    article.setPublishedDate(entry.getPublishedDate());
+                    newsDto.setPublishedDate(entry.getPublishedDate());
 
-                    // 리스트에 생성한 NewsArticle 객체 추가
-                    articles.add(article);
+                    // 리스트에 생성한 NewsDto 객체 추가
+                    newsDtoList.add(newsDto);
                 }
             }
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class NewsService {
             e.printStackTrace();
         }
         // 최종적으로 뉴스 기사 리스트 반환
-        return articles;
+        return newsDtoList;
     }
 
     /**
@@ -83,18 +83,18 @@ public class NewsService {
      * 2. 두번째 뉴스 제목
      * 3. 세번째 뉴스 제목
      *
-     * @param articles 뉴스 기사 리스트
+     * @param newsList 뉴스 기사 리스트
      * @return 번호가 붙은 뉴스 타이틀들의 결합 문자열
      */
-    public String generateTitlesSummaryInput(List<NewsDto> articles) {
+    public String generateTitlesSummaryInput(List<NewsDto> newsList) {
         StringBuilder titlesBuilder = new StringBuilder();
-//        for (int i = 0; i < articles.size(); i++) {
+//        for (int i = 0; i < news.size(); i++) {
         // API 토큰 갯수 제한으로 인해 뉴스 제목 5개만 반환하도록 설정
         for (int i = 0; i < 5; i++) {
             // 번호와 뉴스 제목을 추가
-            titlesBuilder.append(i + 1).append(". ").append(articles.get(i).getTitle());
+            titlesBuilder.append(i + 1).append(". ").append(newsList.get(i).getTitle());
             // 마지막 항목이 아니라면 줄바꿈 추가
-            if (i < articles.size() - 1) {
+            if (i < newsList.size() - 1) {
                 titlesBuilder.append("\n");
             }
         }

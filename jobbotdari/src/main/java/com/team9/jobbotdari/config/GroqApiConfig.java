@@ -34,7 +34,7 @@ public class GroqApiConfig {
 
     /**
      * groqTemperature:
-     * Groq API 요청 시 응답 생성에 사용되는 온도 값입니다.
+     * Groq API 요청 시 응답 생성에 사용되는 온도 값
      * 온도는 0과 1 사이의 값으로, 낮은 값은 더 결정적인(Deterministic) 응답을, 높은 값은 더 무작위적인 응답을 생성합니다.
      * 외부 설정 파일의 "groq.temperature" 속성에서 값을 주입받습니다.
      */
@@ -43,7 +43,7 @@ public class GroqApiConfig {
 
     /**
      * getSystemPromptTemplate:
-     * Groq API 요청 시 사용할 시스템 프롬프트 템플릿을 반환하는 메서드입니다.
+     * Groq API 요청 시 사용할 시스템 프롬프트 템플릿을 반환하는 메서드
      * 템플릿에는 뉴스 기사를 분석하는 역할과, 요약 방식, 그리고 사용자에게 입력받은 기사 내용을 삽입할 위치가 포함되어 있습니다.
      *
      * 반환되는 문자열에는 %s 플레이스홀더가 포함되어 있으며, 실제 사용 시 해당 부분에 뉴스 기사 내용을 포맷팅하여 삽입하게 됩니다.
