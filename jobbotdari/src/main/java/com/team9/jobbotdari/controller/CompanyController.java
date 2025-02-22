@@ -36,8 +36,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addCompanies(@RequestBody List<CompanyRequestDto> companyRequestDtos) {
-        companyService.addCompanies(companyRequestDtos);
+    public ResponseEntity<Map<String, Object>> addCompanies(@RequestBody CompanyRequestDto companyRequestDto) {
+        companyService.addCompanies(companyRequestDto);
         return ResponseEntity.ok(Map.of("code", 200, "data", Map.of("message", "기업 추가 완료")));
     }
 }

@@ -29,15 +29,13 @@ public class CompanyService {
         return mapToCompanyDto(company);
     }
 
-    public void addCompanies(List<CompanyRequestDto> companyRequestDtos) {
-        List<Company> companies = companyRequestDtos.stream()
-                .map(dto -> Company.builder()
-                        .name(dto.getName())
-                        .websiteUrl(dto.getWebsiteUrl())
-                        .build())
-                .collect(Collectors.toList());
+    public void addCompanies(CompanyRequestDto companyRequestDto) {
+        Company company = Company.builder()
+                .name(companyRequestDto.getName())
+                .websiteUrl(companyRequestDto.getWebsiteUrl())
+                .build();
 
-        companyRepository.saveAll(companies);
+        companyRepository.save(company);
     }
 
     private CompanyResponseDto mapToCompanyDto(Company company) {
