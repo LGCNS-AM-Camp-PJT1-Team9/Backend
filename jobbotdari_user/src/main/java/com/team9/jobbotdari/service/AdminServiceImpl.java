@@ -41,25 +41,14 @@ public class AdminServiceImpl implements AdminService {
         List<Log> logs = logRepository.findAll();
 
         return logs.stream()
-                // 사용자별 로그 그룹화
-                .collect(Collectors.groupingBy(log -> log.getUser().getId()))
-                .entrySet().stream()
-                .map(entry -> {
-                    Long userId = entry.getKey();
-                    List<Log> userLogs = entry.getValue();
-                    String userName = userLogs.get(0).getUser().getName();  // 사용자 이름
-
-                    // Log toString() 으로 변환하고, List에 담음
-                    List<String> logStrings = userLogs.stream()
-                            .map(Log::toString)
-                            .collect(Collectors.toList());
-
-                    return LogListResponseDto.builder()
-                            .userId(userId)
-                            .name(userName)
-                            .log(logStrings)
-                            .build();
-                })
+                .map(log -> LogListResponseDto.builder()
+                        .userId(log.getUser().getId())
+                        .name(log.getUser().getName())
+                        .description(log.getDescription())
+                        .action(log.getAction())
+                        .createdAt(log.getCreatedAt())
+                        .build()
+                )
                 .collect(Collectors.toList());
     }
 }
