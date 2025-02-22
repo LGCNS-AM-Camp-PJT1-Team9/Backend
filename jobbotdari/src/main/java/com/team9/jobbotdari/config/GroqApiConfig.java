@@ -5,9 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Getter  // Lombok의 @Getter를 사용하여 각 필드에 대한 getter 메서드를 자동 생성합니다.
-public class GroqConfig {
-
+@Getter
+public class GroqApiConfig {
     /**
      * groqApiUrl:
      * Groq API 엔드포인트 URL
@@ -53,8 +52,10 @@ public class GroqConfig {
      */
     public String getSystemPromptTemplate() {
         return """
+                <|start_header_id|>system<|end_header_id|>
+                
                 당신은 취업준비생을 위한 기업 분석 전문가입니다. 제공된 뉴스 기사를 분석하여, 해당 기업이 최근 어떤 이슈에 주목하고 있으며, 경영 전략, 신사업, 기술 투자, 시장 동향 등을 파악해 주세요.
-                답변은 반드시 한국어로 해주세요.
+                답변은 반드시 한국어로 작성하며, 아래 요약 방식을 준수해 주세요.
                 
                 요약 방식:
                 1. **핵심 내용 요약**: 기사에서 다루는 주요 내용을 3~5줄 이내로 요약합니다.
@@ -62,8 +63,12 @@ public class GroqConfig {
                 3. **취업준비생 관점 분석**: 이 뉴스를 통해 취업준비생이 얻을 수 있는 인사이트를 제공합니다. (예: 기업이 원하는 인재상, 기술 스택, 관련 직무 전망 등)
                 4. **활용 팁**: 지원서나 면접에서 활용할 수 있는 포인트를 제안합니다.
                 
+                <|start_header_id|>user<|end_header_id|>
+                
                 입력 기사:
                 %s
+                
+                <|start_header_id|>assistant<|end_header_id|>
                 """;
     }
 }

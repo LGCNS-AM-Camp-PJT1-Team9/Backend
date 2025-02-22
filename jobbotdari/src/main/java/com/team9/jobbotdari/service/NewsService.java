@@ -5,7 +5,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
-import com.team9.jobbotdari.dto.NewsArticle;
+import com.team9.jobbotdari.dto.NewsDto;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -25,9 +25,9 @@ public class NewsService {
      * @param query 검색어 (사용자가 입력한 키워드)
      * @return 검색 결과에 해당하는 NewsArticle 객체의 리스트
      */
-    public List<NewsArticle> searchNews(String query) {
+    public List<NewsDto> searchNews(String query) {
         // 결과를 저장할 리스트 생성
-        List<NewsArticle> articles = new ArrayList<>();
+        List<NewsDto> articles = new ArrayList<>();
         try {
             // 검색어(query)를 URL 인코딩하여 특수문자 처리
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
@@ -54,17 +54,12 @@ public class NewsService {
                     if (articles.size() >= 5) break;
 
                     // NewsArticle 객체 생성 (dto 클래스)
-                    NewsArticle article = new NewsArticle();
+                    NewsDto article = new NewsDto();
 
                     // 뉴스 제목 설정
                     article.setTitle(entry.getTitle());
                     // 뉴스 링크(원문 URL) 설정
                     article.setLink(entry.getLink());
-
-                    // RSS 항목에 description 정보가 있는 경우, 이를 설정
-                    if (entry.getDescription() != null) {
-                        article.setDescription(entry.getDescription().getValue());
-                    }
 
                     // 뉴스 발행일 설정
                     article.setPublishedDate(entry.getPublishedDate());
@@ -91,9 +86,11 @@ public class NewsService {
      * @param articles 뉴스 기사 리스트
      * @return 번호가 붙은 뉴스 타이틀들의 결합 문자열
      */
-    public String generateTitlesSummaryInput(List<NewsArticle> articles) {
+    public String generateTitlesSummaryInput(List<NewsDto> articles) {
         StringBuilder titlesBuilder = new StringBuilder();
-        for (int i = 0; i < articles.size(); i++) {
+//        for (int i = 0; i < articles.size(); i++) {
+        // API 토큰 갯수 제한으로 인해 뉴스 제목 5개만 반환하도록 설정
+        for (int i = 0; i < 5; i++) {
             // 번호와 뉴스 제목을 추가
             titlesBuilder.append(i + 1).append(". ").append(articles.get(i).getTitle());
             // 마지막 항목이 아니라면 줄바꿈 추가
