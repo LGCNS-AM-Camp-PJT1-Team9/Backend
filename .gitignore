@@ -38,4 +38,5 @@ out/
 
 ### application.yml ###
 jobbotdari/src/main/resources/application.yml
-
+*.yml
+*.properties
