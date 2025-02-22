@@ -40,8 +40,9 @@ dependencies {
 	// for RSS
 	implementation 'com.rometools:rome:2.1.0'
 
-	// for ChatGPT
-	implementation 'org.springframework.ai:spring-ai-openai:1.0.0-M6'
+	// for JSON Parsing
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+
 }
 
 tasks.named('test') {
