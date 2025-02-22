@@ -29,7 +29,7 @@ public class CompanyService {
         return mapToCompanyDto(company);
     }
 
-    public void addCompanies(CompanyRequestDto companyRequestDto) {
+    public void addCompany(CompanyRequestDto companyRequestDto) {
         Company company = Company.builder()
                 .name(companyRequestDto.getName())
                 .websiteUrl(companyRequestDto.getWebsiteUrl())
