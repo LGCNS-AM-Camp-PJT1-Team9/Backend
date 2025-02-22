@@ -9,9 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +29,16 @@ public class AdminController {
         List<UserListResponseDto> userList = adminService.getUserList();
         return ResponseEntity.ok(BaseResponseDto.builder()
                 .data(userList)
+                .code(HTTP_STATUS_OK_CODE)
+                .build());
+    }
+
+    @DeleteMapping("/users/{userId}")
+    @Operation(summary = "유저 삭제", description = "지정한 ID의 유저를 삭제합니다. (관리자만 실행 가능)")
+    public ResponseEntity<BaseResponseDto> deleteUser(@PathVariable Long userId) {
+        adminService.deleteUserById(userId);
+        return ResponseEntity.ok(BaseResponseDto.builder()
+                .data("유저 삭제가 완료되었습니다")
                 .code(HTTP_STATUS_OK_CODE)
                 .build());
     }
