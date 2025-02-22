@@ -28,7 +28,7 @@ public class CompanySummaryScheduler {
     private final NewsSummaryService newsSummaryService;
 
     /**
-     * 매일 자정(00:00)과 정오(12:00)에 실행되는 스케줄러 메서드.
+     * 매일 자정(00:00)과 정오(12:00)에 실행되는 스케줄러 메서드
      * 모든 회사에 대해 회사 이름을 검색어로 사용하여 뉴스 기사를 검색하고,
      * 해당 뉴스 기사 타이틀들을 기반으로 뉴스 요약을 생성하여 회사의 description 필드를 업데이트합니다.
      *

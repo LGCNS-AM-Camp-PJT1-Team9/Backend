@@ -19,7 +19,7 @@ import java.util.List;
 public class NewsService {
 
     /**
-     * 사용자가 입력한 쿼리에 해당하는 뉴스를 검색하여 NewsArticle 리스트로 반환하는 메서드
+     * 사용자가 입력한 쿼리에 해당하는 뉴스를 검색하여 NewsDto 리스트로 반환하는 메서드
      * Google News의 RSS 피드를 이용하여 최신 뉴스를 가져옵니다.
      *
      * @param query 검색어 (사용자가 입력한 키워드)

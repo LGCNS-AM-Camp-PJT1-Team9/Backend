@@ -78,7 +78,7 @@ public class NewsSummaryService {
             //    - URI: groqConfig.getGroqApiUrl()
             //    - 헤더: 구성된 headers 추가
             //    - 요청 본문: requestBody (JSON 형식)
-            //    - 응답을 Map 형태로 반환받습니다.
+            //    - 응답을 JSON String 형태로 반환받습니다.
             String responseJson = restClient.post()
                     .uri(groqApiConfig.getGroqApiUrl())
                     .headers(httpHeaders -> httpHeaders.addAll(headers))
