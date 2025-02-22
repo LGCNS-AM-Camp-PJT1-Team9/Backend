@@ -1,7 +1,6 @@
 package com.team9.jobbotdari.security;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import com.team9.jobbotdari.common.jwt.JwtUtils;
@@ -34,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Swagger 및 인증 없이 허용할 경로
     private final List<String> EXCLUDE_PATHS = List.of(
             "/swagger-ui", "/swagger-ui.html", "/v3/api-docs", "/swagger-resources", "/webjars",
-            "/error", "/signin", "/signup", "/api/auth"
+            "/error", "/signin", "/signup", "/api/auth", "/api/files"
     );
 
     @Override
