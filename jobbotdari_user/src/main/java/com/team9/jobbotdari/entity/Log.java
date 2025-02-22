@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "logs")
@@ -29,5 +30,19 @@ public class Log {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = (createdAt != null) ? createdAt.format(formatter) : "null";
+
+        return String.format(
+                "%s | userId=%s, action=%s, description=%s",
+                formattedDate,
+                (user != null ? user.getId() : "null"),
+                action,
+                description
+        );
+    }
 }
 
