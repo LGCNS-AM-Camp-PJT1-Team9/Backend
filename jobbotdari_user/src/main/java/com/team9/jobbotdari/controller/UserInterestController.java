@@ -16,7 +16,7 @@ public class UserInterestController {
     private final UserInterestService userInterestService;
 
     @GetMapping
-    public ResponseEntity<UserInterestResponseDto> getUserInterests(@RequestParam("user") User user) {
+    public ResponseEntity<UserInterestResponseDto> getUserInterests() {
         UserInterestResponseDto userInterestResponseDto = userInterestService.getUserInterests();
         return ResponseEntity.ok(userInterestResponseDto);
     }
