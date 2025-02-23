@@ -30,7 +30,8 @@ public class LoggingAspect {
 
     @Around("execution(* com.team9.jobbotdari.controller..*(..)) " +
             "|| execution(* com.team9.jobbotdari.service..*(..)) " +
-            "|| execution(* com.team9.jobbotdari.repository..*(..))")
+            "|| (execution(* com.team9.jobbotdari.repository..*(..)) " +
+            "&& !execution(* com.team9.jobbotdari.repository.LogRepository.save(..)))")     // 오류 발생으로 인해 수정
     public Object logAllLayers(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
 
