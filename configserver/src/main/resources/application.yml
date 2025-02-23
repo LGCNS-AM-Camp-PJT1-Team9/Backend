@@ -15,7 +15,7 @@ spring:
             - jobbotdari-user
             - jobbotdari
           username: ${GIT_USERNAME}
-          password: ${GET_PW}
+          password: ${GIT_PW}
           default-label: main
 server:
   port: 8071
