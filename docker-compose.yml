@@ -24,6 +24,11 @@ services:
     container_name: config-server
     ports:
       - "8071:8071"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8071/actuator/health" ]
+      interval: 5s
+      retries: 5
+      start_period: 30s
     environment:
       - SPRING_APPLICATION_NAME=config-server
       - SPRING_PROFILES_ACTIVE=git
@@ -43,7 +48,8 @@ services:
       - SPRING_APPLICATION_NAME=eureka-server
       - SPRING_PROFILES_ACTIVE=default
     depends_on:
-      - config-server
+      config-server:
+        condition: service_healthy
     networks:
       - app-network
 
@@ -72,7 +78,7 @@ services:
     environment:
       - SPRING_APPLICATION_NAME=jobbotdari
       - SPRING_PROFILES_ACTIVE=default
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/jobbotdari_db?serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/news_db?serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=springboot
       - SPRING_DATASOURCE_PASSWORD=p@ssw0rd
     depends_on:
@@ -81,7 +87,7 @@ services:
     networks:
       - app-network
 
-  jobbotdari_user:
+  jobbotdari-user:
     build:
       context: ./jobbotdari_user
       dockerfile: Dockerfile
@@ -91,7 +97,7 @@ services:
     environment:
       - SPRING_APPLICATION_NAME=jobbotdari-user
       - SPRING_PROFILES_ACTIVE=default
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_db?serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/news_db?serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=springboot
       - SPRING_DATASOURCE_PASSWORD=p@ssw0rd
     depends_on:

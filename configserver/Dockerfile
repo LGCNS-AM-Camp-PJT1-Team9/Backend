@@ -5,6 +5,7 @@ COPY --chown=gradle:gradle . .
 RUN gradle build --no-daemon
 
 FROM openjdk:21-jdk-slim
+RUN apt-get update && apt-get install -y curl
 VOLUME /tmp
 COPY --from=builder /home/gradle/project/build/libs/*.jar app.jar
 EXPOSE 8071
