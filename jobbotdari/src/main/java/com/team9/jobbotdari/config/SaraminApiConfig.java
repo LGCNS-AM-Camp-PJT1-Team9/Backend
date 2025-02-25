@@ -27,7 +27,7 @@ public class SaraminApiConfig {
         return Map.of(
                 "access-key", saraminApiKey,
                 "job-category", "2",    // IT 직무
-                "count", count.get(),               // 가져올 데이터 갯수 (100개) -> 필요한 만큼 수정
+                "count", count.get(),               // 가져올 데이터 갯수
                 "fields", "expiration-date",    // 데드라인 표시
                 "sort", "rc"                   // ac: 지원자수 내림차순, rc: 조회수 내림차순
 
