@@ -81,19 +81,6 @@ public class CompanyService {
         }
     }
 
-    // RecruitmentService용 메소드
-    public Company getCompanyByName(String name) {
-        return companyRepository.findByName(name).orElse(null);
-    }
-
-    // RecruitmentService용 메소드 (오버로딩)
-    public Company addCompany(String companyName) {
-        Company company = Company.builder()
-                .name(companyName)
-                .build();
-        return companyRepository.save(company);
-    }
-
     private CompanyResponseDto mapToCompanyDto(Company company) {
         return new CompanyResponseDto(
                 company.getId(),
