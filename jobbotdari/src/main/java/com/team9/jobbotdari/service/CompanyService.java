@@ -60,7 +60,7 @@ public class CompanyService {
 
     // 스케쥴러용 메소드 (오버로딩)
     @Transactional
-    public void updateCompanyDescription() {
+    public void updateCompanyDescription() throws InterruptedException {
         // 1. 모든 회사 엔티티를 조회합니다.
         List<Company> companies = companyRepository.findAll();
 
@@ -77,6 +77,7 @@ public class CompanyService {
             company.setDescription(summary);
             // 업데이트된 회사를 저장합니다.
             companyRepository.save(company);
+            Thread.sleep(10000);
         }
     }
 
