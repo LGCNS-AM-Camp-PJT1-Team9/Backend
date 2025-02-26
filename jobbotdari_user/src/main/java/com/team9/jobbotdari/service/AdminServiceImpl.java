@@ -36,8 +36,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<UserListResponseDto> getUserList() {
+        User currentUser = getCurrentUser();
+        if (currentUser == null) {
+            throw new UserNotFoundException();
+        }
+
         return userRepository.findAll().stream()
-                .filter(user -> !getCurrentUser().getId().equals(user.getId()))     
+                .filter(user -> !currentUser.getId().equals(user.getId()))
                 .map(user -> modelMapper.map(user, UserListResponseDto.class))
                 .collect(Collectors.toList());
     }
