@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: my-dockerhub-username/mysql:latest  # Docker Hub에서 가져옴
+    image: jihoonyc/mysql:latest  # Docker Hub에서 가져옴
     container_name: mysql
     restart: always
     environment:
@@ -18,7 +18,7 @@ services:
       - app-network
 
   config-server:
-    image: my-dockerhub-username/configserver:latest
+    image: jihoonyc/configserver:latest
     container_name: config-server
     ports:
       - "8071:8071"
@@ -26,7 +26,7 @@ services:
       - app-network
 
   eureka-server:
-    image: my-dockerhub-username/eurekaserver:latest
+    image: jihoonyc/eurekaserver:latest
     container_name: eureka-server
     ports:
       - "8070:8070"
@@ -36,7 +36,7 @@ services:
       - app-network
 
   gateway-server:
-    image: my-dockerhub-username/gatewayserver:latest
+    image: jihoonyc/gatewayserver:latest
     container_name: gateway-server
     ports:
       - "8072:8072"
@@ -46,7 +46,7 @@ services:
       - app-network
 
   jobbotdari:
-    image: my-dockerhub-username/jobbotdari:latest
+    image: jihoonyc/jobbotdari:latest
     container_name: jobbotdari
     ports:
       - "8081:8081"
@@ -57,7 +57,7 @@ services:
       - app-network
 
   jobbotdari-user:
-    image: my-dockerhub-username/jobbotdari_user:latest
+    image: jihoonyc/jobbotdari_user:latest
     container_name: jobbotdari-user
     ports:
       - "8080:8080"
